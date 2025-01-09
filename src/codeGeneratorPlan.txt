@@ -1,0 +1,10 @@
+Plan to generate the function code:
+
+1. Starting with the longest increasing substring:
+- convert name to lowercase, run a loop and compare letters with a pre-defined max
+- if current letter is greater than pre-defined max then join letter to a primary string
+- if not, then add to the formed primary string to a list for final comparison later
+- use a loop to find maxLength of all the words in the list
+- run another loop to find and concatenate words having maxLength from the list
+
+2. Finding and adding the starting and ending indices:
