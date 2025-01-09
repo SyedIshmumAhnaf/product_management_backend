@@ -8,3 +8,8 @@ Plan to generate the function code:
 - run another loop to find and concatenate words having maxLength from the list
 
 2. Finding and adding the starting and ending indices:
+- to find the starting and ending index, it is easier to find the indexes of all initial strings
+- to do so, using index mapping I get two formulae to get start and ending index
+- once all the start and end indexes have been found, use the final loop to get final index
+- the start index is to be defined once so using a condition to check for null
+- the end index is to be the last one so for every maxLength match, we update it
