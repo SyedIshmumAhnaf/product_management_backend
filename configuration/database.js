@@ -10,9 +10,8 @@ async function connectDb() {
     await mongoose.connect(process.env.MONGO_URI, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
     console.log("MongoDB has been connected successfully!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error.message);
   }
 }
 
