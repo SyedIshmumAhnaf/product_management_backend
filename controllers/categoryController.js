@@ -1,5 +1,5 @@
 //without capitalization, there could be a shadow conflict
-const Category = require('../models/category')
+const Category = require('../models/category');
 
 const createCategory = async(req, res) => {
     try{
