@@ -64,4 +64,19 @@ const updateProduct = async(req,res) => {
     }
 }
 
-module.exports = {createProduct, getProducts, updateProduct};
+//not required by assessment
+const deleteProduct = async(req, res) => {
+    try{
+        const {id} = req.params;
+        const productToBeDeleted = await Product.findByIdAndDelete(id);
+
+        if (!productToBeDeleted) {
+            return res.status(404).json({ success:false, message:'Product not found!' });
+        }
+        res.status(200).json({success:true, message:'Product deletion successful!'})
+    }catch(error){
+        res.status(500).json({success:'false', message:'Error deleting product', error:error.message});
+    }
+}
+
+module.exports = {createProduct, getProducts, updateProduct, deleteProduct};
