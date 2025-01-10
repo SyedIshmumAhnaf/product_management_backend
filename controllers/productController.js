@@ -40,7 +40,18 @@ const getProducts = async(req, res) => {
         if (name) filters.name = new RegExp(name, 'i'); //RegExp allows case-insensitive search
 
         const products = await Product.find(filters).populate('category');
-        res.status(200).json({success:'true', data: products})
+        //added last for pricing:
+        const productWithPricing = products.map(product => {
+            const discount = product.discount||0;
+            const discountValue = (product.price*discount)/100;
+            const newPrice = product.price-discountValue;
+            return {
+                ...product._doc, //helps to spread the fields of products
+                originalPrice: product.price,
+                newPrice: newPrice.toFixed(2),
+            }
+        })
+        res.status(200).json({success:'true', data: productWithPricing})
     } catch (error) {
         res.status(500).json({success:'false', message:'Error fetching products', error: error.message});        
     }
