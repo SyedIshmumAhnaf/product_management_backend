@@ -13,3 +13,6 @@ Plan to generate the function code:
 - once all the start and end indexes have been found, use the final loop to get final index
 - the start index is to be defined once so using a condition to check for null
 - the end index is to be the last one so for every maxLength match, we update it
+
+3. Hashing using crypto
+- limiting the hashed string using start and end index

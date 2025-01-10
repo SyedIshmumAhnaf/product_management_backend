@@ -1,10 +1,13 @@
-function longestIncreasingSubstring(inputName) {
+const crypto = require('crypto');
+
+let startIdx = null, endIdx = null;
+
+function substringGenerator(inputName) {
     inputName = inputName.toLowerCase();
     let max = 'a';
     let finalString = "", draftString = "";
     let list = [], startIndexList = [], endIndexList = [];
     let currentIndex = 0, whiteSpaceCount = 0;
-    let startIdx = null, endIdx = null;
 
     for (const letter of inputName) {
         if (letter===' ') {
@@ -42,6 +45,7 @@ function longestIncreasingSubstring(inputName) {
             finalString += word;
             if (startIdx===null) {
                 startIdx=startIndexList[list.indexOf(word)];
+                endIdx=endIndexList[list.indexOf(word)];
             }
             else {
                 endIdx=endIndexList[list.indexOf(word)];
@@ -51,9 +55,27 @@ function longestIncreasingSubstring(inputName) {
     return { finalString, startIdx, endIdx };
 }
 
+function rightHalfGenerator(finalString, startIdx, endIdx) {
+    return startIdx+finalString+endIdx;
+} 
 
-let inputName = "Alpha Sorter";
-const { finalString, startIdx, endIdx } = longestIncreasingSubstring(inputName);
-let rightHalf = startIdx+finalString+endIdx;
-console.log(rightHalf);
+function hashFunction(substring, stringLength) {
+    hashedString = crypto.createHash('sha256').update(substring).digest('hex').substring(0, stringLength);
+    return hashedString;
+}
 
+function productCodeGenerator(inputName) {
+    const { finalString, startIdx, endIdx } = substringGenerator(inputName);
+
+    const leftCode = hashFunction(finalString, finalString.length);
+    const rightCode = rightHalfGenerator(finalString, startIdx, endIdx);
+
+    const productCode = leftCode+"-"+rightCode;
+    return productCode;
+}
+
+
+//let inputName = "Alpha Sorter";
+//productCodeGenerator(inputName);
+
+module.exports = productCodeGenerator;

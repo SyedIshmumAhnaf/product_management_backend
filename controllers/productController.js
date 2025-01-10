@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const Category = require('../models/category');
+const productCodeGenerator = require('../src/productCodeCreator');
 
 const createProduct = async(req, res) => {
     try{
@@ -10,7 +11,8 @@ const createProduct = async(req, res) => {
             return res.status(400).json({success:'false', message:'Invalid Category ID!'});
         }
 
-        productCode = 'generated-product-hash-1' //to be defined later
+        //productCode = 'generated-product-hash-1' //to be defined later
+        productCode = productCodeGenerator(name);
 
         const product = new Product({
             name,
