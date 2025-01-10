@@ -59,14 +59,15 @@ function rightHalfGenerator(finalString, startIdx, endIdx) {
     return startIdx+finalString+endIdx;
 } 
 
-function hashFunction(substring, stringLength) {
-    hashedString = crypto.createHash('sha256').update(substring).digest('hex').substring(0, stringLength);
+function hashFunction(str, stringLength) {
+    hashedString = crypto.createHash('sha256').update(str).digest('hex').substring(0, stringLength+1);
     return hashedString;
 }
 
 function productCodeGenerator(inputName) {
     const { finalString, startIdx, endIdx } = substringGenerator(inputName);
 
+    //const leftCode = hashFunction(finalString, startIdx, endIdx);
     const leftCode = hashFunction(finalString, finalString.length);
     const rightCode = rightHalfGenerator(finalString, startIdx, endIdx);
 
