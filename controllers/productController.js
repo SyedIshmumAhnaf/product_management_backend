@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const Category = require('../models/category');
-const productCodeGenerator = require('../src/productCodeCreator');
+const productCodeGenerator = require('../utils/productCodeCreator');
 
 const createProduct = async(req, res) => {
     try{
